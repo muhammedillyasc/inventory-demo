@@ -1,13 +1,21 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { AppController } from './app.controller';
+import { GraphQLModule } from '@nestjs/graphql';
+import { PersonsModule } from './persons/persons.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/demo'), UsersModule],
-  controllers: [AppController],
-  providers: [AppService],
+  //  imports: [MongooseModule.forRoot('mongodb://localhost/demo'), UsersModule],
+
+  //schema first approach
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+      playground: true,
+    }),
+    PersonsModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
