@@ -7,5 +7,5 @@ import { IsNotEmpty } from 'class-validator';
 export class GetPersonArgs {
   @Field()
   @IsNotEmpty()
-  personId: string;
+  personId: number;
 }
